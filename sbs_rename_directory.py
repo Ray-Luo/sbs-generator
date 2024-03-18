@@ -2,6 +2,7 @@ import os
 import re
 import typer
 
+
 app = typer.Typer()
 
 def get_frame_number(filename):
@@ -16,7 +17,7 @@ def rename_files(source_dir: str = typer.Argument(..., help="Path to the input d
     os.makedirs(source_dir, exist_ok=True)
 
     # Process color images
-    color_files = sorted([f for f in os.listdir(source_dir) if f.startswith("frame") and f.endswith(".jpg")], 
+    color_files = sorted([f for f in os.listdir(source_dir) if f.startswith("frame") and f.endswith(".jpg")],
                          key=lambda x: int(x.split("frame")[1].split(".")[0]))
     counter = 0
     for filename in color_files:
@@ -26,7 +27,7 @@ def rename_files(source_dir: str = typer.Argument(..., help="Path to the input d
     print(f"Renamed {counter} color files in {source_dir}.")
 
     # Process depth images
-    depth_files = sorted([f for f in os.listdir(source_dir) if f.startswith("frame") and f.endswith(".png")], 
+    depth_files = sorted([f for f in os.listdir(source_dir) if f.startswith("frame") and f.endswith(".png")],
                          key=get_frame_number)
     counter = 0
     for filename in depth_files:
